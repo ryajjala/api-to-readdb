@@ -1,0 +1,18 @@
+import json
+import boto3
+import random
+
+print('Loading function')
+client = boto3.client('apigatewaymanagementapi', endpoint_url="endpoint_url")
+
+def lambda_handler(event, context):
+    word_list = [ 'word1','word2','word3']
+    select_word = random.choice(word_list)
+    db = boto3.resource("dynamodb","us-east-1")
+    table = db.Table("table")
+    
+    data1 = table.get_item(Key={'key':select_word})
+    data = data1["Item"]["word"]
+    connectionId = event["requestContext"]["connectionId"]
+    response = client.post_to_connection( ConnectionId=connectionId,Data=json.dumps(data).encode('utf-8'))
+    return {"statusCode": 200}
