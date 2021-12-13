@@ -3,7 +3,8 @@ sample-code to learn aws apigateway
 
 
 Lambda function that is triggered by api gateway to read and display random word from a collection of words in dynamodb
-#####Steps for creating this demo
+
+## **Steps for creating this demo**
 API Gateway API route: 
 
 CustomAPI : readDB is created
